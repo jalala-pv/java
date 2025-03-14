@@ -1,0 +1,42 @@
+-- 
+-- Roll No: 22
+-- Name:  JALALA P V
+-- Program: <program name>
+-- 
+
+
+--
+-- Table structure for table departments
+--
+create table departments(dno int primary key,dname varchar(50) NOT NULL);
+--
+-- Table structure for table bookissues
+--
+create table bookissues(bookid int,studentid int,issue_date date,return_date date,fine decimal(5,2) default 0.00);
+alter table bookissues add constraint pkey_bookissues primary key(bookid,studentid);
+
+
+--
+-- Table structure for table students;
+--
+alter table students drop course;
+alter table students add dno int;
+alter table students add constraint students_fkey_bookid foreign key(dno)references departments(dno);
+
+
+
+-- ---------create/alter statement commands----------- # This line may be removed in the actual file
+
+--
+-- Dumping data for table <table_name>
+--
+
+-- --------insert/update statement commands----------- # This line may be removed in the actcual file
+
+--
+-- SQl Query Statements
+--
+
+-- -----SQL query statments preceeded by the its question-------- # This line may be removed in the actual file
+-- -----Question number should be commented---------------#This line may be removed in the actual file
+
