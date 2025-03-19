@@ -521,3 +521,13 @@ elect title from books order by price desc limit 1;
 +-----------+
 | alchemist |
 +-----------+
+select dno,count(studentid) as totalstudents from students group by dno h
+aving count(studentid)>5;
++------+---------------+
+| dno  | totalstudents |
++------+---------------+
+|    1 |             6 |
+|    3 |             6 |
++------+---------------+
+2 rows in set (0.01 sec)
+
