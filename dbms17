@@ -515,5 +515,9 @@ mysql> select max(price) from books;
 +------------+
 1 row in set (0.00 sec)
 
-mysql> select title,max(price) from books;
-ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column '24mca22.books.title'; this is incompatible with sql_mode=only_full_group_by
+elect title from books order by price desc limit 1;
++-----------+
+| title     |
++-----------+
+| alchemist |
++-----------+
