@@ -530,4 +530,239 @@ aving count(studentid)>5;
 |    3 |             6 |
 +------+---------------+
 2 rows in set (0.01 sec)
+select count(studentid) from studentsgroup by dno;                   
+select count(studentid) from studentsgroup by dno;
+^C
+mysql> select dno,count(studentid) from students group by dno;   
++------+------------------+
+| dno  | count(studentid) |
++------+------------------+
+|    1 |                6 |
+|    3 |                6 |
++------+------------------+
+2 rows in set (0.01 sec)
+
+mysql> select studentid,count(bookid) from bookissues group by studentid;
++-----------+---------------+
+| studentid | count(bookid) |
++-----------+---------------+
+|       101 |             1 |
+|       102 |             1 |
+|       104 |             1 |
+|       105 |             1 |
+|       106 |             1 |
+|       110 |             1 |
+|       107 |             2 |
+|       109 |             1 |
++-----------+---------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from bookissues;
++--------+-----------+------------+-------------+--------+
+| bookid | studentid | issue_date | return_date | fine   |
++--------+-----------+------------+-------------+--------+
+|      1 |       101 | 2025-08-02 | 2025-08-08  |   0.00 |
+|      2 |       102 | 2025-09-03 | 2025-09-04  |   0.00 |
+|      4 |       104 | 2025-10-03 | 2025-10-25  |   0.00 |
+|      4 |       105 | 2025-11-08 | 2025-12-12  |   0.00 |
+|      5 |       106 | 2025-01-07 | 2025-01-09  |   0.00 |
+|      6 |       110 | 2025-02-03 | 2025-09-26  |   0.00 |
+|      7 |       107 | 2025-01-25 | NULL        | 100.00 |
+|      7 |       109 | 2025-04-05 | 2025-04-06  |   0.00 |
+|      8 |       107 | 2025-05-05 | 2025-04-22  |   0.00 |
++--------+-----------+------------+-------------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select author,avg(price) from books group by author;
++----------------+------------+
+| author         | avg(price) |
++----------------+------------+
+|  Ramez Elmasri |   550.0000 |
+| Silberschatz   |   770.0000 |
+|  Cormen        |   110.0000 |
+| apj            |   700.0000 |
+| ann            |   600.0000 |
+| nehru          |   700.0000 |
+| s.k.pottakad   |  1000.0000 |
+| paulo          |  1200.0000 |
++----------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> select *from books;
++--------+---------------------------+----------------+-------+
+| bookid | title                     | author         | price |
++--------+---------------------------+----------------+-------+
+|      1 | Database Systems          |  Ramez Elmasri |   550 |
+|      2 | Operating System Concepts | Silberschatz   |   770 |
+|      4 | Algorithms                |  Cormen        |   110 |
+|      5 | wings of fire             | apj            |   700 |
+|      6 | diary of young girl       | ann            |   600 |
+|      7 | discovery of india        | nehru          |   700 |
+|      8 | oru deshathinte kadha     | s.k.pottakad   |  1000 |
+|      9 | alchemist                 | paulo          |  1200 |
++--------+---------------------------+----------------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into books values(10,'abc',apj,700);
+ERROR 1054 (42S22): Unknown column 'apj' in 'field list'
+mysql> insert into books values(10,'abc','apj',700);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select author,avg(price) from books group by author;
++----------------+------------+
+| author         | avg(price) |
++----------------+------------+
+|  Ramez Elmasri |   550.0000 |
+| Silberschatz   |   770.0000 |
+|  Cormen        |   110.0000 |
+| apj            |   700.0000 |
+| ann            |   600.0000 |
+| nehru          |   700.0000 |
+| s.k.pottakad   |  1000.0000 |
+| paulo          |  1200.0000 |
++----------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from books;
++--------+---------------------------+----------------+-------+
+| bookid | title                     | author         | price |
++--------+---------------------------+----------------+-------+
+|      1 | Database Systems          |  Ramez Elmasri |   550 |
+|      2 | Operating System Concepts | Silberschatz   |   770 |
+|      4 | Algorithms                |  Cormen        |   110 |
+|      5 | wings of fire             | apj            |   700 |
+|      6 | diary of young girl       | ann            |   600 |
+|      7 | discovery of india        | nehru          |   700 |
+|      8 | oru deshathinte kadha     | s.k.pottakad   |  1000 |
+|      9 | alchemist                 | paulo          |  1200 |
+|     10 | abc                       | apj            |   700 |
++--------+---------------------------+----------------+-------+
+9 rows in set (0.00 sec)
+
+mysql> select * from bookissues;
++--------+-----------+------------+-------------+--------+
+| bookid | studentid | issue_date | return_date | fine   |
++--------+-----------+------------+-------------+--------+
+|      1 |       101 | 2025-08-02 | 2025-08-08  |   0.00 |
+|      2 |       102 | 2025-09-03 | 2025-09-04  |   0.00 |
+|      4 |       104 | 2025-10-03 | 2025-10-25  |   0.00 |
+|      4 |       105 | 2025-11-08 | 2025-12-12  |   0.00 |
+|      5 |       106 | 2025-01-07 | 2025-01-09  |   0.00 |
+|      6 |       110 | 2025-02-03 | 2025-09-26  |   0.00 |
+|      7 |       107 | 2025-01-25 | NULL        | 100.00 |
+|      7 |       109 | 2025-04-05 | 2025-04-06  |   0.00 |
+|      8 |       107 | 2025-05-05 | 2025-04-22  |   0.00 |
++--------+-----------+------------+-------------+--------+
+9 rows in set (0.01 sec)
+
+mysql> selectdno,count(bookid)  froms tudentsjoin bookissues on students.studentid=bookissues.studentid grop by dno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selectdno,count(bookid)  froms tudentsjoin bookissues on students.studentid=book' at line 1
+mysql> selectdno,count(bookid)  froms students join bookissues on students.studentid=bookissues.studentid grop by dno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selectdno,count(bookid)  froms students join bookissues on students.studentid=bo' at line 1
+mysql> select dno,count(bookid)  froms students join bookissues on students.studentid=bookissues.studentid grop by dno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'students join bookissues on students.studentid=bookissues.studentid grop by dno' at line 1
+mysql> select dno,count(bookid)  from students join bookissues on students.studentid=bookissues.studentid group by dno;
++------+---------------+
+| dno  | count(bookid) |
++------+---------------+
+|    1 |             5 |
+|    3 |             4 |
++------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> selct *from bookissues;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selct *from bookissues' at line 1
+mysql> select * from bookissues;
++--------+-----------+------------+-------------+--------+
+| bookid | studentid | issue_date | return_date | fine   |
++--------+-----------+------------+-------------+--------+
+|      1 |       101 | 2025-08-02 | 2025-08-08  |   0.00 |
+|      2 |       102 | 2025-09-03 | 2025-09-04  |   0.00 |
+|      4 |       104 | 2025-10-03 | 2025-10-25  |   0.00 |
+|      4 |       105 | 2025-11-08 | 2025-12-12  |   0.00 |
+|      5 |       106 | 2025-01-07 | 2025-01-09  |   0.00 |
+|      6 |       110 | 2025-02-03 | 2025-09-26  |   0.00 |
+|      7 |       107 | 2025-01-25 | NULL        | 100.00 |
+|      7 |       109 | 2025-04-05 | 2025-04-06  |   0.00 |
+|      8 |       107 | 2025-05-05 | 2025-04-22  |   0.00 |
++--------+-----------+------------+-------------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select * from students;
++-----------+----------+------+------+
+| studentid | name     | age  | dno  |
++-----------+----------+------+------+
+|       101 | naadhi   |   23 |    1 |
+|       102 | jal      |   22 |    1 |
+|       103 | shahal   |   30 |    1 |
+|       104 | rani     |   22 |    1 |
+|       105 | raj      |   24 |    1 |
+|       106 | rahul    |   25 |    1 |
+|       107 | sona     |   24 |    3 |
+|       108 | rahul    |   25 |    3 |
+|       109 | suhana   |   29 |    3 |
+|       110 | minha    |   25 |    3 |
+|       111 | sunaina  |   29 |    3 |
+|       112 | munnavar |   25 |    3 |
++-----------+----------+------+------+
+12 rows in set (0.00 sec)
+
+mysql> select bookid,count(bookid) from bookissues group by issue_date;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column '24mca22.bookissues.bookid' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select issue_date,count(bookid) from bookissues group by issue_date;
++------------+---------------+
+| issue_date | count(bookid) |
++------------+---------------+
+| 2025-08-02 |             1 |
+| 2025-09-03 |             1 |
+| 2025-10-03 |             1 |
+| 2025-11-08 |             1 |
+| 2025-01-07 |             1 |
+| 2025-02-03 |             1 |
+| 2025-01-25 |             1 |
+| 2025-04-05 |             1 |
+| 2025-05-05 |             1 |
++------------+---------------+
+9 rows in set (0.00 sec)
+
+mysql> select studentid,count(bookid)from bookissues group by studentid having count(bookid)>2;
+Empty set (0.00 sec)
+
+mysql> select studentid,count(bookid)from bookissues group by studentid having count(bookid)>1;
++-----------+---------------+
+| studentid | count(bookid) |
++-----------+---------------+
+|       107 |             2 |
++-----------+---------------+
+1 row in set (0.00 sec)
+
+mysql> select author,count(bookid) from books group by author having count(bookid)>3;
+Empty set (0.00 sec)
+
+mysql> select author,count(bookid) from books group by author having count(bookid)>1;
++--------+---------------+
+| author | count(bookid) |
++--------+---------------+
+| apj    |             2 |
++--------+---------------+
+1 row in set (0.00 sec)
+
+mysql> select author,count(bookid) from books group by author having count(bookid)>3;
+Empty set (0.01 sec)
+
+mysql> select dname,count(bookid) from bookissues join students on students.studentid=bookissues.studentid;
+ERROR 1054 (42S22): Unknown column 'dname' in 'field list'
+mysql> select dno,count(bookid) from bookissues join students on students.studentid=bookissues.studentid;
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column '24mca22.students.dno'; this is incompatible with sql_mode=only_full_group_by
+mysql> select dno,count(bookid) from bookissues join students on students.studentid=bookissues.studentid group by dno  having count(bookid)>3 ;
++------+---------------+
+| dno  | count(bookid) |
++------+---------------+
+|    1 |             5 |
+|    3 |             4 |
++------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> 
+
 
